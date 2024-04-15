@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Randomly Moving Images</title>
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        background-image: url("Capturing\ Her\ Essence\ A\ Photographic\ Journey.png"); /* Replace 'background.jpg' with your image path */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed; /* Keeps the background image fixed while scrolling */
+    }
+    .image {
+        position: absolute;
+        width: 150px; /* Adjust as needed */
+        height: 100px; /* Adjust as needed */
+        transition: transform 1s ease-in-out;
+    }
+    .back-button {
+        display: none;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1001; /* Ensures the button appears above the zoomed image */
+        background-color: rgba(255, 255, 255, 0.5);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+</style>
+</head>
+<body>
+<script>
+    function moveImageRandomly(image) {
+        const x = Math.random() * (window.innerWidth - image.width);
+        const y = Math.random() * (window.innerHeight - image.height);
+        image.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    function enlargeImage(image) {
+        image.style.transform = 'scale(2)';
+        image.style.zIndex = '1000';
+        image.style.position = 'fixed';
+        image.style.top = '0';
+        image.style.left = '0';
+        image.style.width = '100vw';
+        image.style.height = '100vh';
+        image.style.cursor = 'pointer';
+
+        const backButton = document.createElement('button');
+        backButton.textContent = 'Back';
+        backButton.className = 'back-button';
+        backButton.onclick = function () {
+            image.style.transform = 'none';
+            image.style.zIndex = 'initial';
+            image.style.position = 'absolute';
+            image.style.width = '150px'; /* Adjust as needed */
+            image.style.height = '100px'; /* Adjust as needed */
+            backButton.style.display = 'none';
+        };
+        document.body.appendChild(backButton);
+
+        backButton.style.display = 'block';
+    }
+
+    window.onload = function () {
+        const images = document.querySelectorAll('.image');
+        images.forEach(image => {
+            moveImageRandomly(image);
+            setInterval(() => moveImageRandomly(image), 3000);
+            image.onclick = function () {
+                enlargeImage(this);
+            };
+        });
+    };
+</script>
+
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.32.47 PM.jpeg" alt="Image 1">
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.33.26 PM.jpeg" alt="Image 2">
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.33.32 PM.jpeg" alt="Image 3">
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.33.37 PM.jpeg" alt="Image 4">
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.33.39 PM.jpeg" alt="Image 5">
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.33.42 PM (1).jpeg" alt="Image 6">
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.33.43 PM.jpeg" alt="Image 7">
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.33.42 PM.jpeg" alt="Image 8">
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.33.43 PM (1).jpeg" alt="Image 9">
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.33.44 PM (1).jpeg" alt="Image 10">
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.33.44 PM (2).jpeg" alt="Image 11">
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.33.44 PM.jpeg" alt="Image 12">
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.33.45 PM (1).jpeg" alt="Image 13">
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.33.45 PM.jpeg" alt="Image 14">
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.33.46 PM (1).jpeg" alt="Image 15">
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.33.46 PM.jpeg" alt="Image 16">
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.33.47 PM (1).jpeg" alt="Image 17">
+<img class="image" src="WhatsApp Image 2024-04-15 at 4.33.47 PM.jpeg" alt="Image 18">
+<!-- Add more images as needed -->
+</body>
+</html>
